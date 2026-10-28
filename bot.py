@@ -42,7 +42,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     markup = ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True)
 
     await update.message.reply_text(
-        f"Привет, {update.effective_user.first_name}! 👋\n"
+        f"Привет, {update.effective_user.first_name}! \n"
         "Я твой персональный Фитнес-трекер. Давай сделаем твое тело сильнее!\n"
         "Выбери нужное действие в меню ниже:",
         reply_markup=markup
@@ -101,7 +101,7 @@ async def progress_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def start_calories(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     #Начало опроса по КБЖУ
     await update.message.reply_text(
-        "🍏 Давай запишем твои калории за сегодня.\n"
+        "Давай запишем твои калории за сегодня.\n"
         "Напиши, сколько килокалорий (ккал) ты уже потребил (введи число):",
         reply_markup=ReplyKeyboardRemove()
     )
@@ -126,8 +126,8 @@ async def save_calories(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
 
     #Возвращаем главное меню на экран
     reply_keyboard = [
-        ["Планы тренировок", "📊 Отслеживание прогресса"],
-        ["Питание и КБЖУ", "💡 Мотивация"],
+        ["Планы тренировок", "Отслеживание прогресса"],
+        ["Питание и КБЖУ", "Мотивация"],
         ["Напоминание"]
     ]
     markup = ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True)
@@ -164,7 +164,7 @@ def main() -> None:
 
     #Сценарий ветвления для КБЖУ
     calories_conv = ConversationHandler(
-        entry_points=[MessageHandler(filters.Text("🍏 Питание и КБЖУ"), start_calories)],
+        entry_points=[MessageHandler(filters.Text("Питание и КБЖУ"), start_calories)],
         states={
             CALORIES_STATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, save_calories)]
         },
